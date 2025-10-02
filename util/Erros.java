@@ -9,5 +9,12 @@ public class Erros
             super(mensagem);
         }
     }
+    public static class IdadeInvalidaException extends Exception
+    {
+        public IdadeInvalidaException(String mensagem)
+        {
+            super(mensagem);
+        }
+    }
 
 }
