@@ -1,24 +1,62 @@
 package util;
 
-import util.Erros;
-import util.Erros.IdadeInvalidaException;
+import util.Erros.*;
+
+/**
+ * Classe utilitária responsável por centralizar regras de negócio e validações.
+ * Fornece métodos estáticos para validação de idade e quantidade de livros.
+ *
+ * Esta classe não deve ser instanciada.
+ */
 
 public class Regras 
 {
-    public static void VerificarIdade(int minima, int atual) throws IdadeInvalidaException
+
+    /** Quantidade máxima de livros permitida por usuário. */
+    private static final int MAX_LIVROS = 5;
+
+    // Construtor privado para evitar instância
+    private Regras() 
+    {
+        throw new UnsupportedOperationException("ERRO: Classe utilitária não deve ser instanciada.");
+    }
+
+    // verifica se a mudança na quantidade de livros é valida
+    public static void verificarQuantidadeLivros(int atual, int mudanca) throws QuantidadeInvalidaLivrosException
+    {
+        final int quantidadePosMudanca = atual + mudanca;
+
+        if (quantidadePosMudanca < 0 )
+        {
+            throw new QuantidadeInvalidaLivrosException(String.format("ERRO: quantidade invalida, o numero de livros não pode ser menor que 0."));
+        }
+        if (quantidadePosMudanca > MAX_LIVROS)
+        {
+            throw new QuantidadeInvalidaLivrosException(String.format("ERRO: quantidade invalida, o numero de livros não pode exceder %d.", MAX_LIVROS));
+        }
+    }
+
+    //verifica se a idade atende aos requisitos
+    public static void verificarIdade(int minima, int atual) throws IdadeInvalidaException
     {
         if (atual < minima)
         {
-            String mensagem = ".";
+            final String mensagem;
 
-            if (minima == 0)
+            switch (minima)
             {
-                mensagem = " não pode ser negativa.";
+                case 0:
+                    mensagem = " a idade não pode ser menor do que zero";
+                    break;
+            
+                case 18:
+                    mensagem = " o usuario não pode ser menor de idade";
+                    break;
+                default:
+                    mensagem = String.format(" a idade minima exigida é: %d", minima);
+                    break;
             }
-            else if (minima == 18)
-            {
-                mensagem = " não pode ser menor de idade.";
-            }
+
             throw new IdadeInvalidaException("ERRO: idade invalida"+mensagem);
         }
     }

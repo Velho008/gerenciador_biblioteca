@@ -1,7 +1,8 @@
 package classes;
 
-import util.Erros;
-import util.Erros.IdadeInvalidaException;
+import util.Regras.*;
+import util.Regras;
+import util.Erros.*;
 
 public class Usuario 
 {
@@ -9,8 +10,6 @@ public class Usuario
     private final String CPF;
     private int idade;
     private int livros;
-
-    private static final int MAX_LIVROS = 5;
     
     public Usuario(String nome, String CPF, int idade, int livros)
     {
@@ -50,10 +49,7 @@ public class Usuario
     {
         try
         {
-            if (idade < 0)
-            {
-                throw new IdadeInvalidaException("ERRO: a idade não pode ser negativa");
-            }
+            Regras.verificarIdade(0, idade);
             this.idade = idade;
         }
         catch(IdadeInvalidaException e )

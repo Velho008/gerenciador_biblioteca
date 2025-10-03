@@ -16,5 +16,12 @@ public class Erros
             super(mensagem);
         }
     }
+    public static class QuantidadeInvalidaLivrosException extends Exception
+    {
+        public QuantidadeInvalidaLivrosException(String mensagem)
+        {
+            super(mensagem);
+        }
+    }
 
 }
