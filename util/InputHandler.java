@@ -2,45 +2,60 @@ package util;
 
 import java.util.Scanner;
 
-import util.Erros.NumeroForaDoIntervaloException;
+import util.erros.*;
 
-public class InputHandler 
+/**
+ * Classe utilitária para lidar com entrada de dados via console.
+ * Fornece métodos seguros para receber números inteiros,
+ * com ou sem restrição de intervalo.
+ *
+ * Esta classe não deve ser instanciada.
+ */
+
+public final class InputHandler 
 {
-    public static int receberInt(String mensagem, Scanner scanner)
+    // Construtor privado para impedir instância
+    private InputHandler()
+    {
+        throw new UnsupportedOperationException("ERRO: Classe utilitária não deve ser instanciada.");
+    }
+
+    // Solicita ao usuario um numero inteiro
+    public static int receberInt(final String mensagem, final Scanner scanner)
     {
         while(true)
         {
+            System.out.println(mensagem+" ");
+            final String entrada = scanner.nextLine().trim();
+
             try
             {
-                System.out.println(mensagem);
-                int numero = Integer.parseInt(scanner.nextLine().trim());
-                return (numero);
+                return Integer.parseInt(entrada);
             }catch(NumberFormatException e)
             {
-                System.out.println("Erro: digite um numero para prosseguir");
+                System.out.println("ERRO: digite um numero inteiro para prosseguir");
             }
         }
     }
 
-    public static int receberIntIntervalo(String mensagem, Scanner scanner, int min, int max)
+    // Solicita ao usuario um numero inteiro valido dentro de um intervalo
+    public static int receberIntIntervalo(final String mensagem, final Scanner scanner, final int min, final int max)
     {
         while(true)
         {
+            final int numero = receberInt(mensagem + String.format(" (%d-%d): ", min, max), scanner);
+
             try
             {
-                System.out.println(mensagem);
-                int numero = Integer.parseInt(scanner.nextLine().trim());
                 if (numero < min || numero > max)
                 {
-                    throw new Erros.NumeroForaDoIntervaloException("Numero fora do intervalo esperado ("+min+"-"+max+")");
+                    throw new NumeroForaDoIntervaloException(String.format("Numero fora do intervalo esperado (%d-%d)",min,max));
                 }
-                return (numero);
-            }catch(NumberFormatException e)
-            {
-                System.out.println("Erro: digite um numero para prosseguir");
+
+                return numero;
             }catch(NumeroForaDoIntervaloException e)
             {
-                System.out.println("Erro: "+e.getMessage());
+                System.out.println("ERRO: "+e.getMessage());
             }
         }
     }

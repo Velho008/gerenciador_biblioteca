@@ -1,8 +1,7 @@
 package classes;
 
-import util.Regras.*;
 import util.Regras;
-import util.Erros.*;
+import util.erros.*;
 
 public class Usuario 
 {

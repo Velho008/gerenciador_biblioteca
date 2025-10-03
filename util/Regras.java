@@ -1,6 +1,6 @@
 package util;
 
-import util.Erros.*;
+import util.erros.*;
 
 /**
  * Classe utilitária responsável por centralizar regras de negócio e validações.
@@ -9,7 +9,7 @@ import util.Erros.*;
  * Esta classe não deve ser instanciada.
  */
 
-public class Regras 
+public final class Regras 
 {
 
     /** Quantidade máxima de livros permitida por usuário. */
@@ -22,7 +22,7 @@ public class Regras
     }
 
     // verifica se a mudança na quantidade de livros é valida
-    public static void verificarQuantidadeLivros(int atual, int mudanca) throws QuantidadeInvalidaLivrosException
+    public static void verificarQuantidadeLivros(final int atual, final int mudanca) throws QuantidadeInvalidaLivrosException
     {
         final int quantidadePosMudanca = atual + mudanca;
 
@@ -37,7 +37,7 @@ public class Regras
     }
 
     //verifica se a idade atende aos requisitos
-    public static void verificarIdade(int minima, int atual) throws IdadeInvalidaException
+    public static void verificarIdade(final int minima, final int atual) throws IdadeInvalidaException
     {
         if (atual < minima)
         {
