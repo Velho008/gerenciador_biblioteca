@@ -9,7 +9,7 @@ import util.erros.*;
  * Esta classe não deve ser instanciada.
  */
 
-public final class Regras 
+public final class Regras
 {
 
     /** Quantidade máxima de livros permitida por usuário. */
@@ -22,7 +22,7 @@ public final class Regras
     }
 
     // verifica se a mudança na quantidade de livros é valida
-    public static void verificarQuantidadeLivros(final int atual, final int mudanca) throws QuantidadeInvalidaLivrosException
+    public static void verificarMudancaLivros(final int atual, final int mudanca) throws QuantidadeInvalidaLivrosException
     {
         final int quantidadePosMudanca = atual + mudanca;
 
@@ -34,6 +34,12 @@ public final class Regras
         {
             throw new QuantidadeInvalidaLivrosException(String.format("ERRO: quantidade invalida, o numero de livros não pode exceder %d.", MAX_LIVROS));
         }
+    }
+
+    //verifica se um numero de livros cabe no total
+    public static void verificarQuantidadeLivros(final int quantidade) throws QuantidadeInvalidaLivrosException
+    {
+        verificarMudancaLivros(quantidade, 0);
     }
 
     //verifica se a idade atende aos requisitos

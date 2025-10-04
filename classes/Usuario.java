@@ -14,8 +14,8 @@ public class Usuario
     {
         this.nome = nome;
         this.CPF = CPF;
-        this.idade = idade;
-        this.livros = livros;
+        setIdade(idade);
+        setLivros(livros);
     }
 
     public Usuario(String nome, String CPF, int idade)
@@ -55,14 +55,20 @@ public class Usuario
     }
     public void setLivros(int livros)
     {
+        try
+        {
+            Regras.verificarQuantidadeLivros(livros);
+        }catch(QuantidadeInvalidaLivrosException e)
+        {
+            System.out.println(e.getMessage());
+        }
         this.livros = livros;
     }
-
     public void AddLivros(int quantidade)
     {
-        this.livros+=quantidade;
+        setLivros(this.livros+quantidade);
     }
-    public void RemoveLivros(int quantidade)
+    public void RemoverLivros(int quantidade)
     {
         AddLivros(-quantidade);
     }
@@ -72,6 +78,6 @@ public class Usuario
     }
     public void RemoverLivro()
     {
-        RemoveLivros(1);
+        RemoverLivros(1);
     }
 }
