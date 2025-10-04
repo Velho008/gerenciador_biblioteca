@@ -52,6 +52,7 @@ public final class Regras
                 case 18:
                     mensagem = " o usuario não pode ser menor de idade";
                     break;
+                    
                 default:
                     mensagem = String.format(" a idade minima exigida é: %d", minima);
                     break;

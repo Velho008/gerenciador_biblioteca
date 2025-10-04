@@ -20,10 +20,7 @@ public class Usuario
 
     public Usuario(String nome, String CPF, int idade)
     {
-        this.nome = nome;
-        this.CPF = CPF;
-        this.idade = idade;
-        this.livros = 0;
+        this(nome, CPF, idade, 0);
     }
 
     //getters e setters
@@ -67,7 +64,7 @@ public class Usuario
     }
     public void RemoveLivros(int quantidade)
     {
-        this.livros-=quantidade;
+        AddLivros(-quantidade);
     }
     public void AddLivro()
     {
